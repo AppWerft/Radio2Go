@@ -4,11 +4,11 @@ exports.isRightVersion = function() {
 	var xhr = Ti.Network.createHTTPClient({
 		onload : function() {
 			var res = /itemprop="softwareVersion">(.*?)</m.exec(this.responseText);
-			if (res && ( version = res[1].replace(' ', '')) != Ti.App.getVersion()) {
+			if (res && ( version = res[1].replace(/\s+/g, '')) != Ti.App.getVersion()) {
 				var dialog = Ti.UI.createAlertDialog({
 					cancel : 1,
-					buttonNames : ['Update', 'Abbruch'],
-					message : 'Es gibt eine neue Version im Playstore. Möchtest Du erneuern?\nDu hast ' + Ti.App.getVersion() + ' im Store ist ' + version,
+					buttonNames : ['Zum Store', 'Abbruch'],
+					message : 'Es gibt eine neue Version im Playstore.\n\nDiese App auf dem ' + Ti.Platform.model + ' von ' + Ti.Platform.manufacturer + ' hat die Version ' + Ti.App.getVersion() + ' – im Store ist derweil ' + version + '.\n\nMöchtest Du erneuern?',
 					title : 'Neue Version Radio2Go'
 				});
 				dialog.addEventListener('click', function(_e) {
