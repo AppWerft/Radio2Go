@@ -5,6 +5,7 @@ exports.create = function() {
 		
 		backgroundColor : 'white'
 	});
+	
 	self.addEventListener('focus', function() {
 		if (!self.listadded) {
 			Ti.UI.createNotification({

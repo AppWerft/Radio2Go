@@ -8,6 +8,5 @@ exports.create = function() {
 		self.add(self.mapwidget);
 		self.mapwidget.addPins();
 	});
-
 	return self;
 };

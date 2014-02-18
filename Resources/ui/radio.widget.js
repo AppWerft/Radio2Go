@@ -1,4 +1,4 @@
-var W = '200dp', H = '46dp', HH = '61dp';
+var W = '200dp', H = '46dp', HH = '61dp', HHH = '65dp';
 
 var audioPlayer = Ti.Media.createAudioPlayer({
 	allowBackground : true
@@ -14,9 +14,9 @@ var Radio = function() {
 	};
 	this.radiocontainer = Ti.UI.createView({
 		width : Ti.UI.FILL,
-		height : HH,
+		height : HHH,
 		zIndex : 99999,
-		bottom : '-' + HH
+		bottom : '-' + HHH
 	});
 	this.radiocontainer.add(Ti.UI.createView({
 		backgroundColor : 'black',
@@ -47,25 +47,41 @@ var Radio = function() {
 	});
 	this.vumeter = require('ui/vumeter').create({
 		width : W,
-		height : H,left:HH,
+		height : H,
+		left : HH,
 		top : 0
 	});
 	this.radiocontainer.add(this.vumeter);
 	this.radiocontainer.add(this.label);
 	this.radiocontainer.add(this.progress.view);
+	audioPlayer.addEventListener('progress', function(_e) {
+		//console.log(parseInt(_e.progress/1000));
+	});
+	audioPlayer.addEventListener('complete', function(_e) {
+		self.vumeter.stop();
+		self.playing = false;
+		self.radiocontainer.animate({
+			bottom : '-' + HH
+		});
 
+	});
 	audioPlayer.addEventListener('change', function(_e) {
+		console.log(_e.description);
 		self.progress.value = 0;
 		self.progress.view.setWidth(0);
-		console.log(_e.description);
-		if (_e.description == 'playing') {
-			self.vumeter.start();
-			self.cron && clearInterval(self.cron);
-			self.playing = true;
-
-		} else {
-			self.vumeter.stop();
-			self.playing = false;
+		switch (_e.description) {
+			case 'playing':
+				self.vumeter.start();
+				self.cron && clearInterval(self.cron);
+				self.playing = true;
+				break;
+			case 'stopped':
+				self.vumeter.stop();
+				break;
+			default:
+				self.vumeter.stop();
+				self.playing = false;
+				break;
 		}
 	});
 	this.radiocontainer.addEventListener('click', function() {

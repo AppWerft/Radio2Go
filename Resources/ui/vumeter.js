@@ -16,10 +16,10 @@ exports.create = function(_options) {
 	});
 	self.add(self.vu);
 	self.stop = function() {
+		self.vu.visible = false;
 		self.vu.hide();
 	};
 	self.start = function() {
-		console.log('Info: show zappler');
 		self.vu.show();
 		self.vu.visible = true;
 	};

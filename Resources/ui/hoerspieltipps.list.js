@@ -6,7 +6,10 @@ exports.create = function() {
 				items.push({
 					properties : {
 						accessoryType : Ti.UI.LIST_ACCESSORY_TYPE_DETAIL,
-						itemId : _data[i].detaillink
+						itemId : JSON.stringify({
+							url : _data[i].detaillink,
+							title : _data[i].titel
+						})
 					},
 					senderlogo : {
 						image : _data[i].logo
@@ -52,16 +55,24 @@ exports.create = function() {
 	})];
 	for (var offset = 0; offset < self.sections.length; offset++)
 		updateSection(offset);
-	self.addEventListener('itemclick', function(_e) {
+		self.addEventListener('itemclick', function(_e) {
+		var options = JSON.parse(_e.itemId);
 		var win = Ti.UI.createWindow({
 			fullscreen : true,
-			navBarHidden : true
+			navBarHidden : false
 		});
 		win.open();
 		var web = Ti.UI.createWebView({
-			url : _e.itemId
+			url : options.url,
 		});
 		win.add(web);
+		win.addEventListener("open", function() {
+			if (Ti.Android && win.getActivity()) {
+				var activity = win.getActivity();
+				var actionbar = activity.actionBar;
+				actionbar && actionbar.setTitle(options.title);
+			}
+		});
 	});
 	return self;
 };
