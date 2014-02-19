@@ -16,6 +16,8 @@ exports.isRightVersion = function() {
 						Ti.Platform.openURL(url);
 				});
 				dialog.show();
+			} else {
+				Ti.Android && Ti.UI.createNotification({message:'Radio2Go ist in neuester Version ('+Ti.App.getVersion()+')'}).show();
 			}
 		}
 	});

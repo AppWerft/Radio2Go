@@ -3,7 +3,12 @@ exports.create = function(_data) {
 		backgroundColor : 'white',
 		fullscreen : true
 	});
-	self.add(require('ui/podcast.listview').create(self, _data));
+	console.log('Info: start creating podcast window');
+	self.podcastlist = require('ui/podcast.listview').create(self, _data);
+	self.add(self.podcastlist);
+	self.addEventListener("close", function() {
+		console.log('Info: podcast window closed ');
+	});
 	self.addEventListener("open", function() {
 		if (Ti.Platform.osname === "android") {
 			if (! self.getActivity()) {
@@ -22,6 +27,7 @@ exports.create = function(_data) {
 					// comes from loading event of listview
 					// will fired after successful loading of data, wee need filesize
 					self.addEventListener('podcasts_loaded', function(_filesize) {
+						console.log('Info: event podcasts_loaded ');
 						_data.filesize = _filesize.filesize;
 						var saved = Ti.App.Model.isChannelsaved(_data);
 						if (!saved) {
@@ -33,7 +39,7 @@ exports.create = function(_data) {
 							}).addEventListener("click", function(_menuclick) {
 								Ti.App.Model.saveChannel(_data);
 								console.log(_menuclick.source);
-								e.menu.removeItem(2); 
+								e.menu.removeItem(2);
 							});
 						}
 					});
@@ -45,16 +51,8 @@ exports.create = function(_data) {
 					//	actionBar.setIcon('/images/'+_data.station + '.png');
 					activity.actionBar.onHomeIconItemSelected = function() {
 						self.close();
-						Ti.API.info("Home icon clicked! " + '/assets/' + _data.station + '.png');
 					};
 				}
-				/*var abe = require('com.alcoapps.actionbarextras');
-				 abe.setExtras({
-				 title : 'Hörspielkalender',
-				 subtitle : 'Gerade laufende und nächste Hörspiele',
-				 backgroundColor : '#ff4f00'
-				 });*/
-
 			}
 		}
 	});

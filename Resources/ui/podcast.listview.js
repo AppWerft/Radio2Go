@@ -1,4 +1,5 @@
 exports.create = function(_parent, _podcastlist) {
+	console.log('Info: start creating empty podcast listview');
 	var listView = Ti.UI.createListView({
 		templates : {
 			'template' : require('ui/templates').podcastTemplate
@@ -19,10 +20,11 @@ exports.create = function(_parent, _podcastlist) {
 		},
 		onload : function(_podcasts) {
 			filesize = _podcasts.filesize;
+			_parent.remove(listView.progressviewwidget);
+			listView.progressviewwidget = null;
 			_parent.fireEvent('podcasts_loaded', {
 				filesize : filesize
 			});
-			listView.progressviewwidget.hide();
 			var items = [];
 			for (var i = 0; i < _podcasts.podcasts.length; i++) {
 				var podcast = _podcasts.podcasts[i];
@@ -161,8 +163,8 @@ exports.create = function(_parent, _podcastlist) {
 		});
 	});
 	_parent.addEventListener('close', function() {
-		listView.podcastwidget.close();
+		console.log('Info: poccast window closed (event in listview)');
+		_parent && _parent.close();
 	});
-
 	return listView;
 };

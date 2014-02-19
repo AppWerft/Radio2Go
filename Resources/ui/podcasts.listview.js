@@ -113,28 +113,22 @@ exports.create = function() {
 		headerTitle : 'Ohrcast',
 	});
 	sections[15].setItems(getItems(require('model/podcasts/ohrcast').get(), 'ohrcast'));
-	listView.addEventListener('itemclick', function(e) {
-		var win = require('ui/podcast.window').create(JSON.parse(e.itemId));
-		if (Ti.Android)
-			win.open();
-		else
-			self.tab.open(win);
-	});
+	
 	sections[16] = Ti.UI.createListSection({
 		headerTitle : 'Knallbunt',
 	});
 	sections[16].setItems(getItems(require('model/podcasts/knallbunt').get(), 'knallbunt'));
 	
 	
-	
 	listView.addEventListener('itemclick', function(e) {
+		console.log('Info: click on item in podcasts view');
 		var win = require('ui/podcast.window').create(JSON.parse(e.itemId));
 		if (Ti.Android)
 			win.open();
 		else
 			self.tab.open(win);
 	});
-	listView.addEventListener('scrollto', function(_e) {
+		listView.addEventListener('scrollto', function(_e) {
 		try {
 			listView.scrollToItem(_e.ndx, 0);
 		} catch(E) {

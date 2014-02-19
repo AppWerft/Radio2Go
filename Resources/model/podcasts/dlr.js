@@ -50,47 +50,49 @@ var podcasts = {
 	dlf : [],
 	drk : [],
 	drw : [{
-		feed : 'http://www.dradiowissen.de/podcast-agenda.363.de.podcast.xml',
-		title : 'Agenda',
+		feed : 'http://dradiowissen.de/podcast/eine-stunde-film',
+		title : 'Eine Stunde Film',
+		logo : 'http://static.dradiowissen.de/cover/Podcasts/eine_stunde_film.jpg',
 		station : 'drw'
-	}, {
-		feed : 'http://www.dradiowissen.de/globus.26.de.podcast.xml',
-		station : 'drw',
-		title : 'Globus'
-	}, {
-		feed : 'http://www.dradiowissen.de/hoersaal.86.de.podcast.xml',
+	},{
+		feed : 'http://dradiowissen.de/podcast/eine-stunde-liebe',
+		title : 'Eine Stunde Liebe',
+		logo : 'http://static.dradiowissen.de/cover/Podcasts/eine_stunde_liebe.jpg',
+		station : 'drw'
+	},{
+		feed : 'http://dradiowissen.de/podcast/eine-stunde-netz',
+		title : 'Eine Stunde Netz',
+		logo : 'http://static.dradiowissen.de/cover/Podcasts/eine_stunde_netz.jpg',
+		station : 'drw'
+	},{
+		feed : 'http://dradiowissen.de/podcast/eine-stunde-medien',
+		title : 'Eine Stunde Was mit Medien',
+		logo : 'http://static.dradiowissen.de/cover/Podcasts/eine_stunde_medien.jpg',
+		station : 'drw'
+	},{
+		feed : 'http://dradiowissen.de/podcast/einhundert',
+		title : 'Einhundert',
+		logo : 'http://static.dradiowissen.de/cover/Podcasts/einhundert.jpg',
+		station : 'drw'
+	},{
+		feed : 'http://dradiowissen.de/podcast/hoersaal-der-podcast',
 		title : 'Hörsaal',
+		logo : 'http://static.dradiowissen.de/cover/Podcasts/horsaal.jpg',
 		station : 'drw'
-	}, {
-		feed : 'http://www.dradiowissen.de/kultur.11.27.de.podcast.xml',
-		title : 'Kultur',
-		station : 'drw'
-	}, {
-		feed : 'http://www.dradiowissen.de/medien.25.de.podcast.xml',
-		title : 'Medien',
-		station : 'drw'
-	}, {
-		feed : 'http://www.dradiowissen.de/meine-zukunft.28.de.podcast.xml',
-		title : 'Meine Zukunft',
-		station : 'drw'
-	}, {
-		feed : 'http://www.dradiowissen.de/natur.24.de.podcast.xml',
-		title : 'Natur'
-	}, {
-		feed : 'http://www.dradiowissen.de/podcast-wissensnachrichten-des-tages.307.de.podcast.xml',
-		title : 'Wissensnachrichten des Tages',
-		station : 'drw'
-	}, {
-		feed : 'http://www.dradiowissen.de/redaktionskonferenz.91.de.podcast.xml',
+	},{
+		feed : 'http://dradiowissen.de/podcast/redaktionskonferenz',
 		title : 'Redaktionskonferenz',
+		logo : 'http://static.dradiowissen.de/cover/Podcasts/redaktion.jpg',
 		station : 'drw'
-	}, {
-		feed : 'http://www.dradiowissen.de/spielraum.8.29.de.podcast.xml',
-		title : 'Spielraum',
+	},{
+		feed : 'http://dradiowissen.de/podcast/update',
+		title : 'Update',
+		logo : 'http://static.dradiowissen.de/cover/Podcasts/update.jpg',
 		station : 'drw'
-	}, {
-		feed : 'http://www.dradiowissen.de/online-talk.125.de.podcast',
-		title : 'Online-Talk',
+	},{
+		feed : 'http://dradiowissen.de/podcast/zeitmaschine',
+		title : 'Zeitmaschine',
+		logo : 'http://static.dradiowissen.de/cover/Podcasts/zeitmachine.jpg',
 		station : 'drw'
 	}]
 };

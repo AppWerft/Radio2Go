@@ -66,7 +66,6 @@ var Radio = function() {
 
 	});
 	audioPlayer.addEventListener('change', function(_e) {
-		console.log(_e.description);
 		self.progress.value = 0;
 		self.progress.view.setWidth(0);
 		switch (_e.description) {
@@ -76,6 +75,7 @@ var Radio = function() {
 				self.playing = true;
 				break;
 			case 'stopped':
+				Ti.Android && audioPlayer.release();
 				self.vumeter.stop();
 				break;
 			default:
@@ -86,6 +86,10 @@ var Radio = function() {
 	});
 	this.radiocontainer.addEventListener('click', function() {
 		if (audioPlayer.playing == true) {
+			self.last = {
+				url : null,
+				name : null
+			};
 			audioPlayer.stop();
 			self.vumeter.stop();
 			Ti.Android && audioPlayer.release();
