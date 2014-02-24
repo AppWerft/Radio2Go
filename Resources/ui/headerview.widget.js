@@ -1,23 +1,22 @@
-exports.create = function(_options){
-	console.log(_options);
+exports.create = function(_options) {
 	var self = Ti.UI.createView({
 		height : '36dp',
 		backgroundColor : 'gray'
 	});
 	if (_options.key == 'cached') {
-		var quota = (Ti.App.Model.getQuota()) ? Ti.App.Model.getQuota().quota : 0.02;
 		var quotaView = Ti.UI.createProgressBar({
 			min : 0,
 			max : 1,
-			value : quota,
-			bottom : '5dp',
-			height : '30dp',
+			value : 0,
+			height : Ti.UI.FILL,
 			width : Ti.UI.FILL,
-			left : '200dp',
+			left : '18	0dp',
 			right : '10dp'
 		});
-		Ti.App.addEventListener('quota', function(_evt) {
-			quotaView.setValue(_evt.quota.quota);
+		self.addEventListener('setquota', function() {
+			console.log('Info: quota received');
+			var quota = (Ti.App.Model.getQuota()) ? Ti.App.Model.getQuota().quota : 0;
+				quotaView.setValue(quota);
 		});
 		self.add(quotaView);
 		quotaView.show();

@@ -6,7 +6,8 @@ exports.create = function() {
 			podcast.title && items.push({
 				properties : {
 					itemId : JSON.stringify(podcast),
-					accessoryType : Ti.UI.LIST_ACCESSORY_TYPE_DETAIL
+					accessoryType : Ti.UI.LIST_ACCESSORY_TYPE_DETAIL,
+					searchableText : podcast.title + ' ' + podcast.summary
 				},
 				title : {
 					text : podcast.title
@@ -22,7 +23,19 @@ exports.create = function() {
 		}
 		return items;
 	};
+	var search = Titanium.UI.createSearchBar({
+		barColor : '#000',
+		showCancel : true,
+		height : 43,
+		top : 0,
+		visible : false
+	});
+	search.addEventListener('cancel', function() {
+		search.blur();
+	});
 	var listView = Ti.UI.createListView({
+		searchView : search,
+		caseInsensitiveSearch : true,
 		top : 0,
 		templates : {
 			'template' : require('ui/templates').podcastsTemplate
@@ -97,8 +110,7 @@ exports.create = function() {
 		headerTitle : 'Oesterreichischer Rundfunk',
 	});
 	sections[12].setItems(getItems(require('model/podcasts/orf').get(), 'orf'));
-	
-	
+
 	sections[13] = Ti.UI.createListSection({
 		headerTitle : 'RAI Bozen Südtirol',
 	});
@@ -113,13 +125,12 @@ exports.create = function() {
 		headerTitle : 'Ohrcast',
 	});
 	sections[15].setItems(getItems(require('model/podcasts/ohrcast').get(), 'ohrcast'));
-	
+
 	sections[16] = Ti.UI.createListSection({
 		headerTitle : 'Knallbunt',
 	});
 	sections[16].setItems(getItems(require('model/podcasts/knallbunt').get(), 'knallbunt'));
-	
-	
+
 	listView.addEventListener('itemclick', function(e) {
 		console.log('Info: click on item in podcasts view');
 		var win = require('ui/podcast.window').create(JSON.parse(e.itemId));
@@ -128,7 +139,7 @@ exports.create = function() {
 		else
 			self.tab.open(win);
 	});
-		listView.addEventListener('scrollto', function(_e) {
+	listView.addEventListener('scrollto', function(_e) {
 		try {
 			listView.scrollToItem(_e.ndx, 0);
 		} catch(E) {

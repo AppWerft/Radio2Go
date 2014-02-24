@@ -4,7 +4,7 @@
 exports.create = function() {
 	var options = arguments[0] || {}, items = [];
 	var section = Ti.UI.createListSection({
-		headerView : require('ui/headerview.widget').create(options),
+		title : null
 	});
 	function updateList() {
 		console.log('Info: start updateList with: ' + options.key);
@@ -22,7 +22,7 @@ exports.create = function() {
 			var podcast = podcasts[i];
 			switch (options.key) {
 				case 'channels':
-					var item = new Item(podcast,section,i);
+					var item = new Item(podcast, section, i);
 					items.push(item);
 					break;
 				default:
@@ -59,9 +59,15 @@ exports.create = function() {
 			}
 		}
 		section.setItems(items);
+		if (options.key == 'cached')
+			self.header.fireEvent('setquota', {});
 	}// ends of updateList
 
-	var self = Ti.UI.createListView({
+	var self = Ti.UI.createView({
+		layout : 'vertical',
+	});
+	self.header = require('ui/headerview.widget').create(options);
+	self.list = Ti.UI.createListView({
 		templates : {
 			'template' : (options.key == 'channels') ? require('ui/templates').channelsTemplate : require('ui/templates').podcastTemplate
 		},
@@ -71,8 +77,8 @@ exports.create = function() {
 		backgroundColor : 'white',
 		sections : [section]
 	});
-
-	self.addEventListener('itemclick', function(_evt) {
+	self.list.addEventListener('itemclick', function(_evt) {
+		console.log(_evt);
 		var podcast = JSON.parse(_evt.itemId);
 		if (options.key != 'channels')
 			options.onclick && options.onclick(podcast);
@@ -84,9 +90,8 @@ exports.create = function() {
 				self.tab.open(win);
 		}
 	});
-	self.addEventListener('swipe', function(_evt) {
-		console.log(_evt);
-	});
+	self.add(self.header);
+	self.add(self.list);
 	self.update = updateList;
 	return self;
 };

@@ -58,6 +58,7 @@ var Radio = function() {
 		//console.log(parseInt(_e.progress/1000));
 	});
 	audioPlayer.addEventListener('complete', function(_e) {
+		Ti.Android && audioPlayer.release();	
 		self.vumeter.stop();
 		self.playing = false;
 		self.radiocontainer.animate({

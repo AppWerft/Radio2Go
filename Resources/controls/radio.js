@@ -53,13 +53,12 @@ var Radio = function() {
 		console.log('Warning: cannot access DB !!!!!!!!!');
 };
 
-
 Radio.prototype.getKnallbunt = function() {
 	var url = 'http://www.hoerspieltipps.net/media/knallbunt.xml';
 	var xhr = Ti.Network.createHTTPClient();
-	xhr.open('GET',url,true);
+	xhr.open('GET', url, true);
 	xhr.send();
-	
+
 };
 Radio.prototype.getHoerspieltipps = function(_weekoffset, _callback) {
 	var moment = require('vendor/moment');
@@ -94,7 +93,8 @@ Radio.prototype.getHoerspieltipps = function(_weekoffset, _callback) {
 				}
 			}
 			_callback(termine);
-		} else console.log(_y );
+		} else
+			console.log(_y);
 
 	});
 };
@@ -471,6 +471,10 @@ Radio.prototype.getPodcast = function(_args) {
 				var logo = doc.getElementsByTagName("itunes:image");
 				var items = doc.getElementsByTagName("item");
 				var podcasts = [];
+				if (!items.length) {
+					_args.onload(null);
+					return;
+				}
 				Ti.Android && Ti.UI.createNotification({
 					message : items.length + ' Podcasts gefunden.'
 				}).show();

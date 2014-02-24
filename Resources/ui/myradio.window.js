@@ -54,11 +54,10 @@ exports.create = function() {
 	});
 	self.addEventListener('focus', function() {
 		console.log('Info: focus of depot received ndx=' + self.scrollableView.currentPage);
-		console.log(depotlistviews[i]);
 		depotlistviews[self.scrollableView.currentPage].update && depotlistviews[self.scrollableView.currentPage].update();
 	});
 	self.add(self.podcastwidget.getView());
-
+	
 	return self;
 
 };

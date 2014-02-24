@@ -19,9 +19,14 @@ exports.create = function(_parent, _podcastlist) {
 			listView.progressviewwidget.setMessage('Bitte etwas Geduld.');
 		},
 		onload : function(_podcasts) {
+		//	_parent.remove(listView.progressviewwidget);
+			listView.progressviewwidget.hide();
+			if (!_podcasts) {
+				_parent.close();
+				return;
+			}
 			filesize = _podcasts.filesize;
-			_parent.remove(listView.progressviewwidget);
-			listView.progressviewwidget = null;
+
 			_parent.fireEvent('podcasts_loaded', {
 				filesize : filesize
 			});

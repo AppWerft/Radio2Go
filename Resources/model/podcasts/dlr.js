@@ -32,7 +32,6 @@ exports.get = function(_callback) {
 					} catch(E) {
 						console.log(E);
 					}
-
 				}
 				Ti.App.Properties.setObject('dlrlist', podcasts);
 				_callback(podcasts);
