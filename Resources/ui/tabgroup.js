@@ -18,7 +18,7 @@ exports.create = function() {// this sets the background color of the master UIV
 				}, 3000);
 			});
 			self.actionBar = self.activity.actionBar;
-			if (self.actionBar) {
+			if (self.actionBar !== undefined) {
 				self.activity.onCreateOptionsMenu = function(e) {
 					e.menu.clear();
 					e.activity = self.activity;

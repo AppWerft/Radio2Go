@@ -19,7 +19,7 @@ exports.create = function(_parent, _podcastlist) {
 			listView.progressviewwidget.setMessage('Bitte etwas Geduld.');
 		},
 		onload : function(_podcasts) {
-		//	_parent.remove(listView.progressviewwidget);
+			//	_parent.remove(listView.progressviewwidget);
 			listView.progressviewwidget.hide();
 			if (!_podcasts) {
 				_parent.close();
@@ -173,3 +173,4 @@ exports.create = function(_parent, _podcastlist) {
 	});
 	return listView;
 };
+

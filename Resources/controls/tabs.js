@@ -59,7 +59,7 @@ exports.create = function(self) {
 			visible : true
 		}).addEventListener("click", function() {
 			clearAllChecked();
-			_e.menu.getItem(0).checked = true;
+			e.menu.getItem(0).checked = true;
 			tabs[2].window.mapwidget.setMaptype(0);
 		});
 		e.menu.add({
